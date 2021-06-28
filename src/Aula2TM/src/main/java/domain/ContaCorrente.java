@@ -1,7 +1,6 @@
-package Aula2.src.main.java.domain;
+package Aula2TM.src.main.java.domain;
 
 import javax.naming.OperationNotSupportedException;
-import java.math.BigDecimal;
 
 public class ContaCorrente {
 

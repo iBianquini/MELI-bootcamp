@@ -1,8 +1,8 @@
-package Aula2.src.main.java;
+package Aula2TM.src.main.java;
 
 
 
-import Aula2.src.main.java.domain.*;
+import Aula2TM.src.main.java.domain.*;
 
 import javax.naming.OperationNotSupportedException;
 import java.math.BigInteger;
