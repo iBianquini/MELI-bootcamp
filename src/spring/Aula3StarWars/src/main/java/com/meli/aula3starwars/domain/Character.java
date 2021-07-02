@@ -1,12 +1,14 @@
 package com.meli.aula3starwars.domain;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.meli.aula3starwars.service.DeserealizerCustom;
 
+@JsonDeserialize(using = DeserealizerCustom.class)
 public class Character {
 
     private String name;
-    private String height;
-    private String mass;
+    private Integer height;
+    private Integer mass;
     private String hair_color;
 
     @JsonProperty("skin_color")
@@ -25,7 +27,7 @@ public class Character {
     public Character() {
     }
 
-    public Character(String name, String height, String mass, String hair_color, String skinColor, String eyeColor, String birthYear, String gender, String homeworld, String species) {
+    public Character(String name, Integer height, Integer mass, String hair_color, String skinColor, String eyeColor, String birthYear, String gender, String homeworld, String species) {
         this.name = name;
         this.height = height;
         this.mass = mass;
@@ -46,19 +48,19 @@ public class Character {
         this.name = name;
     }
 
-    public String getHeight() {
+    public int getHeight() {
         return height;
     }
 
-    public void setHeight(String height) {
+    public void setHeight(int height) {
         this.height = height;
     }
 
-    public String getMass() {
+    public int getMass() {
         return mass;
     }
 
-    public void setMass(String mass) {
+    public void setMass(int mass) {
         this.mass = mass;
     }
 
