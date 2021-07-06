@@ -1,9 +1,11 @@
 package com.meli.aula2pedidos.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.meli.aula2pedidos.dto.PedidoDTO;
 import com.meli.aula2pedidos.dto.PratoDTO;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,12 +14,15 @@ public class Pedido {
     private int idMesa;
     private List<Prato> pratosSolicitados;
     private BigDecimal total;
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private LocalDateTime dataPedido;
 
-    public Pedido(int id, int idMesa, BigDecimal total) {
+    public Pedido(int id, int idMesa, List<Prato> pratosSolicitados, BigDecimal total, LocalDateTime dataPedido) {
         this.id = id;
         this.idMesa = idMesa;
-        this.pratosSolicitados = new ArrayList<>();
+        this.pratosSolicitados = pratosSolicitados;
         this.total = total;
+        this.dataPedido = dataPedido;
     }
 
     public Pedido(int id, int idMesa, List<Prato> pratos) {
@@ -29,6 +34,7 @@ public class Pedido {
             var soma = prato.getValor().multiply(BigDecimal.valueOf(prato.getQuantidade()));
             this.total = this.total.add(soma);
         }
+        this.dataPedido = LocalDateTime.now();
     }
 
     public int getId() {
@@ -61,6 +67,14 @@ public class Pedido {
 
     public void setTotal(BigDecimal total) {
         this.total = total;
+    }
+
+    public LocalDateTime getDataPedido() {
+        return dataPedido;
+    }
+
+    public void setDataPedido(LocalDateTime dataPedido) {
+        this.dataPedido = dataPedido;
     }
 
     public PedidoDTO castToDTO(){

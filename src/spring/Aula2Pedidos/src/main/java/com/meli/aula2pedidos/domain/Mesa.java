@@ -11,17 +11,20 @@ public class Mesa {
     private int id;
     private List<Pedido> pedidos;
     private BigDecimal totalConsumido;
+    private boolean isActive;
 
-    public Mesa(int id, List<Pedido> pedidos, BigDecimal totalConsumido) {
+    public Mesa(int id, List<Pedido> pedidos, BigDecimal totalConsumido, boolean isActive) {
         this.id = id;
         this.pedidos = pedidos;
         this.totalConsumido = totalConsumido;
+        this.isActive = isActive;
     }
 
     public Mesa(int id) {
         this.id = id;
         this.pedidos = new ArrayList<>();
         this.totalConsumido = new BigDecimal(0);
+        this.isActive = true;
     }
 
     public int getId() {
@@ -53,9 +56,16 @@ public class Mesa {
         this.totalConsumido = totalConsumido;
     }
 
-    public void limparMesa(){
-        this.totalConsumido = BigDecimal.valueOf(0);
-        this.pedidos = new ArrayList<>();
+    public void fecharMesa(){
+        this.isActive = false;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 
     public MesaDTO castToDTO() {
