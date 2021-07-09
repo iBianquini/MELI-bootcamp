@@ -1,14 +1,11 @@
 package com.meli.aula2clientes.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.meli.aula2clientes.domain.Produto;
 import com.meli.aula2clientes.enums.CoresEnum;
 
 import java.math.BigDecimal;
 
 public class ProdutoDTO {
-    @JsonIgnore
-    private static int ID = 1;
 
     private String descricao;
     private CoresEnum cor;
@@ -54,7 +51,8 @@ public class ProdutoDTO {
         this.valor = valor;
     }
 
-    public Produto castToProduto(){
-        return new Produto(ID,this.descricao,this.cor,this.quantidade,this.valor);
+    public Produto castToProduto() {
+        int ID = 1;
+        return new Produto(ID, this.descricao, this.cor, this.quantidade, this.valor);
     }
 }

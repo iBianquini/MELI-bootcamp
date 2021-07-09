@@ -19,7 +19,7 @@ public class Cliente {
         this.nome = nome;
     }
 
-    public void addPedido(Pedido pedido){
+    public void addPedido(Pedido pedido) {
         this.pedidos.add(pedido);
     }
 

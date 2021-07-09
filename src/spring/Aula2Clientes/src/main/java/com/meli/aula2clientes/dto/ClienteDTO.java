@@ -2,7 +2,6 @@ package com.meli.aula2clientes.dto;
 
 import com.meli.aula2clientes.domain.Cliente;
 import com.meli.aula2clientes.domain.Pedido;
-import com.meli.aula2clientes.domain.Produto;
 
 import java.util.List;
 
@@ -42,7 +41,7 @@ public class ClienteDTO {
         this.produtos = produtos;
     }
 
-    public Cliente castToClient(){
+    public Cliente castToClient() {
         return new Cliente(this.cpf, this.Nome, this.produtos);
     }
 }

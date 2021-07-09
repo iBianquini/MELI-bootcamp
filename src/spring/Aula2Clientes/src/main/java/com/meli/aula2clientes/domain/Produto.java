@@ -60,7 +60,7 @@ public class Produto {
         this.valor = valor;
     }
 
-    public ProdutoDTO castToDto(){
-        return new ProdutoDTO(this.descricao,this.cor,this.quantidade,this.valor);
+    public ProdutoDTO castToDto() {
+        return new ProdutoDTO(this.descricao, this.cor, this.quantidade, this.valor);
     }
 }

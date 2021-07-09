@@ -4,6 +4,7 @@ import com.meli.aula2clientes.dto.PedidoDTO;
 import com.meli.aula2clientes.dto.ProdutoDTO;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,11 +12,13 @@ public class Pedido {
     private int id;
     private List<Produto> produtos;
     private BigDecimal total;
+    private LocalDate createdAt;
 
-    public Pedido(int id, List<Produto> produtos, BigDecimal total) {
+    public Pedido(int id, List<Produto> produtos, BigDecimal total, LocalDate createdAt) {
         this.id = id;
         this.produtos = produtos;
         this.total = total;
+        this.createdAt = createdAt;
     }
 
     public Pedido(int id) {
@@ -24,7 +27,7 @@ public class Pedido {
         this.total = new BigDecimal(0);
     }
 
-    public void addProduto(Produto produto){
+    public void addProduto(Produto produto) {
         this.produtos.add(produto);
         var productTotal = produto.getValor().multiply(BigDecimal.valueOf(produto.getQuantidade()));
         this.total = this.total.add(productTotal);
@@ -54,13 +57,21 @@ public class Pedido {
         this.total = total;
     }
 
-    public PedidoDTO castToDTO(){
+    public LocalDate getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDate createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public PedidoDTO castToDTO() {
         var produtosDTO = new ArrayList<ProdutoDTO>();
 
-        for (Produto prod:this.produtos) {
+        for (Produto prod : this.produtos) {
             produtosDTO.add(prod.castToDto());
         }
 
-        return new PedidoDTO(produtosDTO,total);
+        return new PedidoDTO(produtosDTO, total);
     }
 }
