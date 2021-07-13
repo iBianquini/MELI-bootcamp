@@ -1,42 +1,37 @@
 package com.meli.aula2diploma.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.meli.aula2diploma.domain.Aluno;
+
+@JsonPropertyOrder({"message", "average", "student"})
 public class DiplomaDTO {
 
-    private String alunoNome;
+    @JsonProperty(value = "average")
+    @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     private double mediaFinal;
+    @JsonProperty(value = "message")
     private String mensagem;
+    @JsonProperty(value = "student")
+    private Aluno aluno;
 
-    public DiplomaDTO(String alunoNome, double mediaFinal) {
-        this.alunoNome = alunoNome;
-        this.mediaFinal = mediaFinal;
 
-        if (mediaFinal > 9)
-            mensagem = "Parabens !";
-        else
-            mensagem = "";
-    }
-
-    public String getAlunoNome() {
-        return alunoNome;
-    }
-
-    public void setAlunoNome(String alunoNome) {
-        this.alunoNome = alunoNome;
+    public DiplomaDTO(Aluno aluno) {
+        this.mediaFinal =  aluno.calcularMedia();
+        this.mensagem = (this.mediaFinal > 9) ? "Sua média foi: " + this.mediaFinal + " parabens!" : "Sua média foi: " + this.mediaFinal;
+        this.aluno = aluno;
     }
 
     public double getMediaFinal() {
         return mediaFinal;
     }
 
-    public void setMediaFinal(double mediaFinal) {
-        this.mediaFinal = mediaFinal;
-    }
-
     public String getMensagem() {
         return mensagem;
     }
 
-    public void setMensagem(String mensagem) {
-        this.mensagem = mensagem;
+    public Aluno getAluno() {
+        return aluno;
     }
 }
