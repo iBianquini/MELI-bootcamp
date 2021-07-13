@@ -15,17 +15,14 @@ public class AlunoController {
     @Autowired
     DiplomaService service;
 
-    public AlunoController(){
+    public AlunoController() {
         this.service = new DiplomaService();
     }
 
 
-
-
-
     @RequestMapping(value = "/analyzeNotes", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public DiplomaDTO getDiploma(@RequestBody @Valid Aluno incomingAluno){
+    public DiplomaDTO getDiploma(@RequestBody @Valid Aluno incomingAluno) {
         return service.generateDiploma(incomingAluno);
     }
 }
