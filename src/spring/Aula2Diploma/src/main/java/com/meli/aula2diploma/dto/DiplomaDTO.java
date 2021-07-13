@@ -19,7 +19,7 @@ public class DiplomaDTO {
 
     public DiplomaDTO(Aluno aluno) {
         this.mediaFinal =  aluno.calcularMedia();
-        this.mensagem = (this.mediaFinal > 9) ? "Sua média foi: " + this.mediaFinal + " parabens!" : "Sua média foi: " + this.mediaFinal;
+        this.mensagem = (this.mediaFinal >= 9) ? "Sua média foi: " + this.mediaFinal + " parabens!" : "Sua média foi: " + this.mediaFinal;
         this.aluno = aluno;
     }
 

@@ -19,8 +19,6 @@ public class Aluno {
 
 
     @JsonProperty(value = "subjects")
-    @NotEmpty
-    @NotNull
     @Valid
     private List<Disciplina> disciplinas;
 
