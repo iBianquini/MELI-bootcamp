@@ -14,11 +14,7 @@ public class AlunoController {
 
     @Autowired
     DiplomaService service;
-
-    public AlunoController() {
-        this.service = new DiplomaService();
-    }
-
+    
 
     @RequestMapping(value = "/analyzeNotes", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)

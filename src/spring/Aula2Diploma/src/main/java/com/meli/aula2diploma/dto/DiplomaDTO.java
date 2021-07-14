@@ -17,10 +17,17 @@ public class DiplomaDTO {
     private Aluno aluno;
 
 
-    public DiplomaDTO(Aluno aluno) {
-        this.mediaFinal =  aluno.calcularMedia();
-        this.mensagem = (this.mediaFinal >= 9) ? "Sua média foi: " + this.mediaFinal + " parabens!" : "Sua média foi: " + this.mediaFinal;
+    public DiplomaDTO(double mediaFinal, String mensagem, Aluno aluno) {
+        this.mediaFinal = mediaFinal;
+        this.mensagem = mensagem;
         this.aluno = aluno;
+    }
+
+    public static DiplomaDTO generateDiploma(Aluno aluno) {
+        var media = aluno.calcularMedia();
+        if (media < 7) return null;
+        var mensagem = (media >= 9) ? "Sua média foi: " + media + " parabens!" : "Sua média foi: " + media;
+        return new DiplomaDTO(aluno.calcularMedia(), mensagem, aluno);
     }
 
     public double getMediaFinal() {

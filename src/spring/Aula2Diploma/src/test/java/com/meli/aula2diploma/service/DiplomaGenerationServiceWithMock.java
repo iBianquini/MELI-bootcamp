@@ -30,7 +30,7 @@ public class DiplomaGenerationServiceWithMock {
 
         Aluno aluno1 = new Aluno("Osvaldo", Arrays.asList(d1, d2, d3));
 
-        DiplomaDTO dto = new DiplomaDTO(aluno1);
+        DiplomaDTO dto = DiplomaDTO.generateDiploma(aluno1);
 
         when(alunoController.getDiploma(aluno1)).thenReturn(dto);
 

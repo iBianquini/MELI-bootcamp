@@ -1,10 +1,10 @@
 package com.meli.aula2diploma.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,8 +13,7 @@ public class Aluno {
 
     @JsonProperty(value = "name")
     @NotBlank(message = "Campo não pode ser vazio")
-
-    @Pattern(message = "Nome deve ter no minimo 8 caracteres e no maximo 40", regexp = "^[a-zA-Z]{2,}(?: [a-zA-Z]+){0,2}$")
+    @Pattern(message = "Nome deve ter no minimo 8 caracteres e no maximo 40", regexp = "^[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}$")
     private String nome;
 
 
@@ -49,7 +48,7 @@ public class Aluno {
         this.disciplinas = disciplinas;
     }
 
-    public double calcularMedia(){
+    public double calcularMedia() {
         double media = 0;
         for (Disciplina d : this.disciplinas) {
             media += d.getNota();

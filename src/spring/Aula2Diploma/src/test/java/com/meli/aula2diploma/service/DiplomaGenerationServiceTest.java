@@ -8,20 +8,23 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
+@SpringBootTest
 public class DiplomaGenerationServiceTest {
 
-    @Mock
+    @Autowired
     private AlunoController controller;
 
     @BeforeEach
     public void init() {
-        this.controller = new AlunoController();
+        //this.controller = new AlunoController();
     }
 
     @Test
