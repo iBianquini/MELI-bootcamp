@@ -7,6 +7,8 @@ import com.meli.dentinhosmongo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -18,12 +20,15 @@ public class UserService {
     }
 
     public User createUser(UserDTO userDTO) {
-        if (userDTO.getCodeMp() == null || !userDTO.getCodeMp().isEmpty())
+        if (userDTO.getCodeMp() == null || userDTO.getCodeMp().isEmpty())
             return this.createPatient(userDTO);
         else
             return this.createDentist(userDTO);
     }
 
+    public List<Dentist> getDentistsByCodeMp(List<String> dentistsMp){
+        return this.userRepository.findByCodeMpIn(dentistsMp);
+    }
 
     private User createPatient(UserDTO userDTO) {
         User patient = User.castToPatient(userDTO);

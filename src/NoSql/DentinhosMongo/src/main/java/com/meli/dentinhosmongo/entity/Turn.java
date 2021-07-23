@@ -1,16 +1,18 @@
 package com.meli.dentinhosmongo.entity;
 
+import com.meli.dentinhosmongo.dto.TurnCreationDTO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Document(collection = "turns")
 public class Turn {
 
     @Id
-    private Integer id;
+    private String id;
 
     private LocalDateTime startTime;
 
@@ -21,22 +23,29 @@ public class Turn {
     public Turn() {
     }
 
-    public Turn(Integer id, LocalDateTime startTime, LocalDateTime endingTime, List<Dentist> dentists) {
-        this.id = id;
+    public Turn(LocalDateTime startTime, LocalDateTime endingTime, List<Dentist> dentists) {
         this.startTime = startTime;
         this.endingTime = endingTime;
         this.dentists = dentists;
+    }
+
+    public static Turn castToEntity(TurnCreationDTO turnCreationDTO) {
+        return new Turn(turnCreationDTO.getStartTime(), turnCreationDTO.getEndTime(), new ArrayList<>());
     }
 
     public void setDentistToTurn(Dentist dentist) {
         this.dentists.add(dentist);
     }
 
-    public Integer getId() {
+    public void setDentistsToTurn(List<Dentist> dentists) {
+        this.dentists.addAll(dentists);
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
