@@ -1,5 +1,6 @@
 package com.meli.dentinhosmongo.entity;
 
+import com.meli.dentinhosmongo.dto.DentistScheduleDTO;
 import com.meli.dentinhosmongo.dto.UserDTO;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -45,5 +46,9 @@ public class Dentist extends User {
 
     public void setDiaries(List<Schedule> diaries) {
         this.diaries = diaries;
+    }
+
+    public DentistScheduleDTO castToDentistScheduleDTO() {
+        return new DentistScheduleDTO(this.getName(), this.getLastName(), this.getCodeMp());
     }
 }

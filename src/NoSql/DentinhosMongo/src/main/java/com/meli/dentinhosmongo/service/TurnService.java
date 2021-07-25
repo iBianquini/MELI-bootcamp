@@ -1,12 +1,16 @@
 package com.meli.dentinhosmongo.service;
 
 import com.meli.dentinhosmongo.dto.TurnCreationDTO;
+import com.meli.dentinhosmongo.dto.TurnRetrievalDTO;
+import com.meli.dentinhosmongo.dto.UserRetrievalDTO;
 import com.meli.dentinhosmongo.entity.Dentist;
 import com.meli.dentinhosmongo.entity.Turn;
+import com.meli.dentinhosmongo.entity.User;
 import com.meli.dentinhosmongo.repository.TurnRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,5 +50,17 @@ public class TurnService {
         if (turn.isPresent())
             return turn.get();
         throw new RuntimeException("Turno não encontrado");
+    }
+
+    public List<TurnRetrievalDTO> getAllTurns() {
+        List<Turn> turns = this.turnRepository.findAll();
+        List<TurnRetrievalDTO> turnRetrievalDTOs = new ArrayList<>();
+
+        for (Turn turn : turns) {
+            List<UserRetrievalDTO> userDTOs = User.castToUserDTO(turn.getDentists());
+            turnRetrievalDTOs.add(turn.castToRetrievalDTO(userDTOs));
+        }
+
+        return turnRetrievalDTOs;
     }
 }

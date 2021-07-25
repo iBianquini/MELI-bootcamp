@@ -10,4 +10,8 @@ import java.util.List;
 @Repository
 public interface UserRepository extends MongoRepository<User, String> {
     List<Dentist> findByCodeMpIn(List<String> dentistsMp);
+
+    User findByDni(String patientDni);
+
+    Dentist findByCodeMp(String codeMp);
 }

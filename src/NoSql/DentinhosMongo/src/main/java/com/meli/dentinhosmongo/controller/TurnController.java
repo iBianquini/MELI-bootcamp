@@ -1,8 +1,10 @@
 package com.meli.dentinhosmongo.controller;
 
 import com.meli.dentinhosmongo.dto.TurnCreationDTO;
+import com.meli.dentinhosmongo.dto.TurnRetrievalDTO;
 import com.meli.dentinhosmongo.entity.Turn;
 import com.meli.dentinhosmongo.service.TurnService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,8 +14,9 @@ import java.util.List;
 @RequestMapping("/turn")
 public class TurnController {
 
-    private TurnService turnService;
+    private final TurnService turnService;
 
+    @Autowired
     public TurnController(TurnService turnService) {
         this.turnService = turnService;
     }
@@ -27,5 +30,10 @@ public class TurnController {
     @PostMapping("/set/{turnId}")
     public void setDentistToTurn(@PathVariable String turnId, @RequestBody List<String> dentistsMp) {
         this.turnService.setDentistToTurn(turnId, dentistsMp);
+    }
+
+    @GetMapping("/all")
+    public List<TurnRetrievalDTO> getAllTurns() {
+        return this.turnService.getAllTurns();
     }
 }

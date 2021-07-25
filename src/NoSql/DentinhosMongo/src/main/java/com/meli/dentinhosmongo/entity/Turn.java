@@ -1,6 +1,9 @@
 package com.meli.dentinhosmongo.entity;
 
 import com.meli.dentinhosmongo.dto.TurnCreationDTO;
+import com.meli.dentinhosmongo.dto.TurnRetrievalDTO;
+import com.meli.dentinhosmongo.dto.UserDTO;
+import com.meli.dentinhosmongo.dto.UserRetrievalDTO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -71,5 +74,9 @@ public class Turn {
 
     public void setDentists(List<Dentist> dentists) {
         this.dentists = dentists;
+    }
+
+    public TurnRetrievalDTO castToRetrievalDTO(List<UserRetrievalDTO> dentists) {
+        return new TurnRetrievalDTO(this.startTime, this.endingTime, dentists);
     }
 }

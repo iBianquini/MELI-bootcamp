@@ -1,55 +1,60 @@
 package com.meli.dentinhosmongo.entity;
 
+import com.meli.dentinhosmongo.dto.DentistScheduleDTO;
+import com.meli.dentinhosmongo.dto.ScheduleDTO;
+import com.meli.dentinhosmongo.dto.UserScheduleDTO;
 import com.meli.dentinhosmongo.entity.enums.ScheduleStatus;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Document(collection = "schedules")
 public class Schedule {
 
     @Id
-    private Integer id;
+    private String id;
 
-    private LocalDate days;
+    private LocalDateTime days;
 
-    private ScheduleStatus turnStatus;
+    private ScheduleStatus scheduleStatus;
 
     private User patient;
+
+    private Dentist dentist;
 
     public Schedule() {
     }
 
-    public Schedule(Integer id, LocalDate days, ScheduleStatus turnStatus, User patient) {
-        this.id = id;
+    public Schedule(LocalDateTime days, ScheduleStatus turnStatus, User patient, Dentist dentist) {
         this.days = days;
-        this.turnStatus = turnStatus;
+        this.scheduleStatus = turnStatus;
         this.patient = patient;
+        this.dentist = dentist;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public LocalDate getDays() {
+    public LocalDateTime getDays() {
         return days;
     }
 
-    public void setDays(LocalDate days) {
+    public void setDays(LocalDateTime days) {
         this.days = days;
     }
 
-    public ScheduleStatus getTurnStatus() {
-        return turnStatus;
+    public ScheduleStatus getScheduleStatus() {
+        return scheduleStatus;
     }
 
-    public void setTurnStatus(ScheduleStatus turnStatus) {
-        this.turnStatus = turnStatus;
+    public void setScheduleStatus(ScheduleStatus scheduleStatus) {
+        this.scheduleStatus = scheduleStatus;
     }
 
     public User getPatient() {
@@ -58,5 +63,19 @@ public class Schedule {
 
     public void setPatient(User patient) {
         this.patient = patient;
+    }
+
+    public Dentist getDentist() {
+        return dentist;
+    }
+
+    public void setDentist(Dentist dentist) {
+        this.dentist = dentist;
+    }
+
+    public ScheduleDTO castToScheduleDTO() {
+        UserScheduleDTO userScheduleDTO = this.getPatient().castToUserScheduleDTO();
+        DentistScheduleDTO dentistScheduleDTO = this.getDentist().castToDentistScheduleDTO();
+        return new ScheduleDTO(this.id, userScheduleDTO, dentistScheduleDTO, this.getDays(), this.getScheduleStatus());
     }
 }

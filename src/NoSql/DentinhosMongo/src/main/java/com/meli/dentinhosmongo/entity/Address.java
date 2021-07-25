@@ -7,24 +7,24 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Address {
 
     @Id
-    private Integer id;
+    private String id;
     private String street;
     private String district;
 
     public Address() {
     }
 
-    public Address(Integer id, String street, String district) {
+    public Address(String id, String street, String district) {
         this.id = id;
         this.street = street;
         this.district = district;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -1,10 +1,14 @@
 package com.meli.dentinhosmongo.entity;
 
 import com.meli.dentinhosmongo.dto.UserDTO;
+import com.meli.dentinhosmongo.dto.UserRetrievalDTO;
+import com.meli.dentinhosmongo.dto.UserScheduleDTO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Document(collection = "users")
 public class User {
@@ -47,6 +51,19 @@ public class User {
 
     public static User castToPatient(UserDTO userDTO) {
         return new User(userDTO.getPassword(), userDTO.getUserStatus(), userDTO.getName(), userDTO.getLastName(), userDTO.getDni(), userDTO.getBirthDate(), userDTO.getPhone(), userDTO.getEmail(), userDTO.getAddress());
+    }
+
+    public static List<UserRetrievalDTO> castToUserDTO(List<Dentist> dentists) {
+        List<UserRetrievalDTO> userDTOs = new ArrayList<>();
+        for (Dentist dentist : dentists) {
+            userDTOs.add(castToUserRetrievalDTO(dentist));
+        }
+
+        return userDTOs;
+    }
+
+    private static UserRetrievalDTO castToUserRetrievalDTO(Dentist dentist) {
+        return new UserRetrievalDTO(dentist.getName(), dentist.getLastName(), dentist.getUserStatus(), dentist.getDni(), dentist.getBirthDate(), dentist.getPhone(), dentist.getEmail(), dentist.getAddress(), dentist.getCodeMp());
     }
 
     public String getId() {
@@ -127,5 +144,9 @@ public class User {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public UserScheduleDTO castToUserScheduleDTO() {
+        return new UserScheduleDTO(this.name, this.lastName, this.birthDate, this.getEmail());
     }
 }
