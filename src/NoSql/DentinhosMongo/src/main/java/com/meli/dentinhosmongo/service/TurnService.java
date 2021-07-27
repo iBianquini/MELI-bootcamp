@@ -54,8 +54,20 @@ public class TurnService {
 
     public List<TurnRetrievalDTO> getAllTurns() {
         List<Turn> turns = this.turnRepository.findAll();
-        List<TurnRetrievalDTO> turnRetrievalDTOs = new ArrayList<>();
+        return this.castTurnsToDTO(turns);
+    }
 
+    public List<TurnRetrievalDTO> getTurnByDentistLastName(String lastName) {
+        Dentist dentist = this.userService.getDentistByLastName(lastName);
+
+        List<Turn> turns = this.turnRepository.findTurnByDentistsContains(dentist);
+
+        return this.castTurnsToDTO(turns);
+
+    }
+
+    private List<TurnRetrievalDTO> castTurnsToDTO(List<Turn> turns) {
+        List<TurnRetrievalDTO> turnRetrievalDTOs = new ArrayList<>();
         for (Turn turn : turns) {
             List<UserRetrievalDTO> userDTOs = User.castToUserDTO(turn.getDentists());
             turnRetrievalDTOs.add(turn.castToRetrievalDTO(userDTOs));
@@ -63,4 +75,5 @@ public class TurnService {
 
         return turnRetrievalDTOs;
     }
+
 }

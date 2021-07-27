@@ -51,6 +51,13 @@ public class UserService {
         throw new RuntimeException("Dentista não encontrado.");
     }
 
+    public Dentist getDentistByLastName(String lastName) {
+        Dentist dentist = this.userRepository.findByLastName(lastName);
+        if (dentist != null)
+            return dentist;
+        throw new RuntimeException("Dentista não encontrado.");
+    }
+
     private User createPatient(UserDTO userDTO) {
         User patient = User.castToPatient(userDTO);
 

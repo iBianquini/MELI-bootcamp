@@ -36,4 +36,9 @@ public class TurnController {
     public List<TurnRetrievalDTO> getAllTurns() {
         return this.turnService.getAllTurns();
     }
+
+    @GetMapping("/{lastName}")
+    public List<TurnRetrievalDTO> getTurnByDentistLastName(@PathVariable String lastName){
+        return this.turnService.getTurnByDentistLastName(lastName);
+    }
 }

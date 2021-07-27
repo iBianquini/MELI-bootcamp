@@ -14,4 +14,6 @@ public interface UserRepository extends MongoRepository<User, String> {
     User findByDni(String patientDni);
 
     Dentist findByCodeMp(String codeMp);
+
+    Dentist findByLastName(String lastName);
 }
