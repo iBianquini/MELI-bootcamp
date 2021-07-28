@@ -1,0 +1,16 @@
+
+-- 1
+CREATE USER ml_app_user1 WITH ENCRYPTED PASSWORD 'ml_app_user1' NOSUPERUSER NOCREATEDB LOGIN; 
+
+-- 2
+CREATE USER ml_app_user2 WITH ENCRYPTED PASSWORD 'ml_app_user2' SUPERUSER; 
+
+-- 3
+CREATE ROLE readaccess;
+
+GRANT USAGE ON SCHEMA public TO readaccess;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO readaccess;
+
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO readaccess;\
+CREATE USER ml_app_user3 WITH PASSWORD 'ml_app_user3';
+GRANT readaccess TO ml_app_user3;
